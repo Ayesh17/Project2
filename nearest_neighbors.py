@@ -1,0 +1,1 @@
+KNN_test(X_tran, Y_train, X_test,Y_test)

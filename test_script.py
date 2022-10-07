@@ -17,9 +17,12 @@ def load_data(file_data):
     return X,Y
 
 X,Y = load_data("nearest_neighbors_1.csv")
-print(X)
-acc = nn.KNN_test(X,Y,X,Y,1)
+#acc = nn.KNN_test(X,Y,X,Y,1)
+acc = nn.KNN_test(X,Y,X,Y,3)
 print("KNN:", acc)
+
+k = nn.choose_K(X,Y,X,Y)
+print(k)
 
 # X = np.genfromtxt("clustering_1.csv", skip_header=1, delimiter=',')
 # mu = np.array([[1],[5]])

@@ -14,7 +14,8 @@ def print_hi(name):
 if __name__ == '__main__':
     print_hi('PyCharm')
 
-arr = [1,2,3,4]
-print(arr[0:3])
+arr = [[1,2,3],[3,4,3]]
+
+print(np.mean(arr,axis=0))
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

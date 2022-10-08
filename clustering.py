@@ -94,15 +94,21 @@ def K_Means_better(X,K):
 
 def get_randoms(X,K):
     #to remove duplicates to solve nan issues when same cluster center repeats
-    list= X.tolist()
+    dataset = X.tolist()
     result = [] #result is an array without duplicates
-    for x in list:
+    for x in dataset:
         if x not in result:
             result.append(x)
 
-
     randoms = np.random.choice(len(result), size=K, replace=False)
-    arr = np.zeros(shape=(K, len(X[0])))
+
+    #to suit both 1D and multi dimential arrays
+    if(isinstance(X[0],float)):
+        arr = np.zeros(shape=(K, 1))
+    else:
+        arr = np.zeros(shape=(K, len(X[0])))
+
+    # get random cluster centers
     for i in range(len(randoms)):
         arr[i] = result[randoms[i]]
 

@@ -16,23 +16,23 @@ def load_data(file_data):
     Y = np.array(Y)
     return X,Y
 
-# X,Y = load_data("nearest_neighbors_1.csv")
-# acc = nn.KNN_test(X,Y,X,Y,1)
-# #acc = nn.KNN_test(X,Y,X,Y,3)
-# print("KNN:", acc)
+X,Y = load_data("nearest_neighbors_1.csv")
+acc = nn.KNN_test(X,Y,X,Y,1)
+#acc = nn.KNN_test(X,Y,X,Y,3)
+print("KNN:", acc)
 
 # k = nn.choose_K(X,Y,X,Y)
 # print(k)
-
-X = np.genfromtxt("clustering_2.csv", skip_header=1, delimiter=',')
-#mu = np.array([[1],[5]])
-# mu = np.array([[1,0],[5,0]])
+#
+# X = np.genfromtxt("clustering_2.csv", skip_header=1, delimiter=',')
+# mu = np.array([[1],[5]])
+# # mu = np.array([[1,0],[5,0]])
 # mu = kmeans.K_Means(X,2,mu)
 # print("KMeans:", mu)
+#
+# kmeans.K_Means_better(X,2)
 
-kmeans.K_Means_better(X,2)
-
-# X,Y = load_data("perceptron_1.csv")
-# W = perceptron_train(X,Y)
-# acc = perceptron_test(X,Y,W[0],W[1])
-# print("Percept:", acc)
+X,Y = load_data("perceptron_1.csv")
+W = perceptron_train(X,Y)
+acc = perceptron_test(X,Y,W[0],W[1])
+print("Percept:", acc)

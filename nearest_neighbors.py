@@ -4,6 +4,7 @@ import scipy.spatial as sci
 
 def KNN_test(X_train, Y_train, X_test, Y_test, K):
 
+    #get Euclidean distances
     distances = []
     for i in range (len(X_test)):
         dist_list = []
@@ -13,9 +14,9 @@ def KNN_test(X_train, Y_train, X_test, Y_test, K):
         dist_list = np.argsort(dist_list)
         dist_list = dist_list[0:K]
 
-
         distances.append(dist_list)
 
+    #get predictions
     preds = []
     for i in range(len(distances)):
         positives = 0
@@ -31,8 +32,9 @@ def KNN_test(X_train, Y_train, X_test, Y_test, K):
         else:
             preds.append(-1)
 
-    #print(preds)
 
+
+    #get accuracy
     correct = 0
     wrong =0
 
@@ -46,10 +48,10 @@ def KNN_test(X_train, Y_train, X_test, Y_test, K):
     return accuracy;
 
 def choose_K(X_train, Y_train, X_val, Y_val):
-    length = len(X_train);
     best_acc = 0;
     k = 0;
 
+    #get the best K
     for i in range(1,len(X_train)):
         acc = KNN_test(X_train, Y_train, X_val, Y_val, i)
         if acc > best_acc:

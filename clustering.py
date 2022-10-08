@@ -43,13 +43,13 @@ def get_clusters(X, K, mu, distances):
         min = np.argmin(dist_list)
         arr[min][i] = i + 1
 
+    #get clusters
     clusters = []
     for i in range(len(arr)):
         list = []
         for j in range(len(arr[i])):
             if (arr[i][j] != 0):
                 pos = int(arr[i][j])
-                #print(X[pos-1])
                 list.append(X[pos-1])
         clusters.append(list)
 
@@ -64,28 +64,19 @@ def get_cluster_centers(clusters):
 
 def K_Means_better(X,K):
 
+    #get 1000 random cluster centers
     centers = []
     for i in range (0,1000):
         arr = get_randoms(X,K)
         center = K_Means(X,K,arr)
         centers.append(center)
 
-    # centers_list = []
-    # for i in range(len(centers)):
-    #     list = []
-    #     for j in range(len(centers[i])):
-    #
-    #         for k in range(len(centers[j])):
-    #             list.append(centers[i][j][k])
-    #     centers_list.append(list)
-    #
-    # centers_list_arr = np.array(centers_list)
-
+    #get the count of cluster centers
     centers_list_arr = np.array(centers)
     val, count = np.unique(centers_list_arr, axis =0, return_counts = True)
 
+    #get best cluster center
     best_center = val[count == count.max()]
-    print(best_center)
 
     return best_center
 

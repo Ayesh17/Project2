@@ -65,31 +65,32 @@ def get_cluster_centers(clusters):
 def K_Means_better(X,K):
 
     centers = []
-    for i in range (0,100):
+    for i in range (0,1000):
         arr = get_randoms(X,K)
         center = K_Means(X,K,arr)
         centers.append(center)
 
-    print(centers[0])
-    centers_list = []
-    for i in range(len(centers)):
-        list = []
-        for j in range(len(centers[i])):
+    # centers_list = []
+    # for i in range(len(centers)):
+    #     list = []
+    #     for j in range(len(centers[i])):
+    #
+    #         for k in range(len(centers[j])):
+    #             list.append(centers[i][j][k])
+    #     centers_list.append(list)
+    #
+    # centers_list_arr = np.array(centers_list)
 
-            for k in range(len(centers[j])):
-                list.append(centers[i][j][k])
-        centers_list.append(list)
-    print("t1")
-    print(centers_list)
-    print("t2")
-    centers_list_arr = np.array(centers_list)
-    print(centers_list_arr)
-    val = np.unique(centers_list_arr, axis =0)
-    print(val)
-    #print(counts)
+    centers_list_arr = np.array(centers)
+    val, count = np.unique(centers_list_arr, axis =0, return_counts = True)
 
-    mode = stats.mode(centers)
-    print(mode)
+    best_center = val[count == count.max()]
+    print(best_center)
+
+    return best_center
+
+
+
 
 def get_randoms(X,K):
     #to remove duplicates to solve nan issues when same cluster center repeats

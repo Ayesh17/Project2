@@ -4,21 +4,28 @@ import scipy.spatial as sci
 
 def K_Means(X, K, mu):
 
-    print(mu)
+    #get euclidean distance
     distances = distance(X, K, mu)
 
+    #get clusters
     clusters = get_clusters(X, K, mu, distances)
-
 
     #get cluster centers
     centers = get_cluster_centers(clusters)
-    print(centers)
+    #print(centers)
 
-    equal = np.array_equal(mu,centers)
-    print(equal)
+    #recursively call the function until cluster centers doesn't change
+    if np.array_equal(mu,centers):
+        print (centers)
+        return centers
+    else:
+        K_Means(X, K, centers)
 
 
-    return 0
+
+
+
+
 
 def distance(X, K, mu):
     cent = mu

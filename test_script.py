@@ -24,7 +24,7 @@ def load_data(file_data):
 # k = nn.choose_K(X,Y,X,Y)
 # print(k)
 
-X = np.genfromtxt("clustering_2.csv", skip_header=1, delimiter=',')
+X = np.genfromtxt("clustering_1.csv", skip_header=1, delimiter=',')
 #mu = np.array([[1],[5]])
 mu = np.array([[1,0],[5,0]])
 mu = kmeans.K_Means(X,2,mu)

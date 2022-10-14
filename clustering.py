@@ -4,7 +4,11 @@ import scipy.spatial as sci
 from scipy import stats
 
 def K_Means(X, K, mu):
-    #get euclidean distance
+    # to suit both 1D and multi dimential arrays
+    if (isinstance(X[0], float)):
+        X = X.reshape(len(X), 1)
+
+    # get euclidean distance
     distances = distance(X, K, mu)
 
     #get clusters
@@ -12,11 +16,9 @@ def K_Means(X, K, mu):
 
     #get cluster centers
     centers = get_cluster_centers(clusters)
-    #print(centers)
 
     #recursively call the function until cluster centers doesn't change
     if np.array_equal(mu,centers):
-        #print(centers)
         return centers
     else:
         return K_Means(X, K, centers)

@@ -18,19 +18,12 @@ def load_data(file_data):
 
 X,Y = load_data("nearest_neighbors_1.csv")
 acc = nn.KNN_test(X,Y,X,Y,1)
-#acc = nn.KNN_test(X,Y,X,Y,3)
 print("KNN:", acc)
 
-# k = nn.choose_K(X,Y,X,Y)
-# print(k)
-#
-# X = np.genfromtxt("clustering_2.csv", skip_header=1, delimiter=',')
-# mu = np.array([[1],[5]])
-# # mu = np.array([[1,0],[5,0]])
-# mu = kmeans.K_Means(X,2,mu)
-# print("KMeans:", mu)
-#
-# kmeans.K_Means_better(X,2)
+X = np.genfromtxt("clustering_1.csv", skip_header=1, delimiter=',')
+mu = np.array([[1],[5]])
+mu = kmeans.K_Means(X,2,mu)
+print("KMeans:", mu)
 
 X,Y = load_data("perceptron_1.csv")
 W = percept.perceptron_train(X,Y)

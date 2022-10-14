@@ -34,5 +34,5 @@ print("KNN:", acc)
 
 X,Y = load_data("perceptron_1.csv")
 W = percept.perceptron_train(X,Y)
-# acc = percept.perceptron_test(X,Y,W[0],W[1])
-# print("Percept:", acc)
+acc = percept.perceptron_test(X,Y,W[0],W[1])
+print("Percept:", acc)

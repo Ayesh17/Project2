@@ -9,7 +9,6 @@ def min_max(X):
 
 def K_Means(X, K, mu):
     # to suit both 1D and multi dimential arrays
-    print(len(mu))
 
     min,max = min_max(X)
 
@@ -20,7 +19,6 @@ def K_Means(X, K, mu):
         else:
             mu = np.random.randint(min,max,size=(K,len(X[0])))
 
-    print("mu new",mu[0][1])
 
     if (isinstance(X[0], float)):
         X = X.reshape(len(X), 1)
@@ -52,18 +50,15 @@ def K_Means_cal(X, K, mu):
 def distance(X, K, mu):
     cent = mu
     distances = []
-    print("X st",X)
-    print("cent start", cent)
     for i in range(len(X)):
         dist_list = []
         for j in range(K):
-            print("x",X[i])
-            print("j",cent[j])
+
             dist = sci.distance.euclidean(X[i], cent[j])
-            print("dist",dist)
+
             dist_list.append(dist)
         distances.append(dist_list)
-    print("distances",distances)
+
     return distances
 
 def get_clusters(X, K, distances):
@@ -104,12 +99,13 @@ def K_Means_better(X,K):
 
     #get the count of cluster centers
     centers_list_arr = np.array(centers)
+
     val, count = np.unique(centers_list_arr, axis =0, return_counts = True)
 
     #get best cluster center
     best_center = val[count == count.max()]
 
-    return best_center
+    return best_center[0]
 
 
 
@@ -137,15 +133,17 @@ def get_randoms(X,K):
     return arr
 
 def plot2(X,mu, K=2):
-    # get euclidean distance
-    distances = distance(X, K, mu)
-    print(distances)
+    cluster_centers = K_Means_better(X, K)
+    print("test")
+    print(cluster_centers)
 
+    # get euclidean distance
+    distances = distance(X, K, cluster_centers)
+    print(distances)
     # get clusters
     clusters = get_clusters(X, K, distances)
+    print(clusters)
 
-    cluster_centers = get_cluster_centers(clusters)
-    print("cluster_centers",cluster_centers)
 
     cluster1= clusters[0]
     x_clust_1 = np.zeros(len(cluster1))
@@ -165,7 +163,7 @@ def plot2(X,mu, K=2):
     plt.scatter(x_clust_2, y_clust_2, color="black")
 
     cluster_centers = get_cluster_centers(clusters)
-    print("cluster_centers", cluster_centers)
+
     x_clust_centers = np.zeros(len(cluster_centers))
     y_clust_centers = np.zeros(len(cluster_centers))
     for i in range(len(cluster_centers)):
@@ -181,9 +179,12 @@ def plot2(X,mu, K=2):
     plt.show()
 
 def plot3(X, mu, K=3):
+    cluster_centers = K_Means_better(X, K)
+    print("test")
+    print(cluster_centers)
+
     # get euclidean distance
-    distances = distance(X, K, mu)
-    print(distances)
+    distances = distance(X, K, cluster_centers)
 
     #get clusters
     clusters = get_clusters(X, K, distances)
@@ -216,7 +217,7 @@ def plot3(X, mu, K=3):
 
 
     cluster_centers = get_cluster_centers(clusters)
-    print("cluster_centers", cluster_centers)
+
     x_clust_centers = np.zeros(len(cluster_centers))
     y_clust_centers = np.zeros(len(cluster_centers))
     for i in range(len(cluster_centers)):

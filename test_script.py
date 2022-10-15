@@ -26,13 +26,15 @@ X = np.genfromtxt("clustering_2.csv", skip_header=1, delimiter=',')
 #mu = np.array([[1],[5]])
 mu = np.array([])
 mu = kmeans.K_Means(X,3,mu)
-print("KMeans:", mu)
+# center=kmeans.K_Means_better(X,2)
+# print("KMeans:", mu)
+# print("center", center)
 
-plot2 = kmeans.plot2(X,mu)
-print(plot2)
-
-# plot3 = kmeans.plot3(X,mu)
-# print(plot3)
+# plot2 = kmeans.plot2(X,mu)
+# print(plot2)
+#
+plot3 = kmeans.plot3(X,mu)
+print(plot3)
 
 # X,Y = load_data("perceptron_3.csv")
 # W = percept.perceptron_train(X,Y)

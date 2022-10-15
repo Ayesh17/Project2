@@ -144,6 +144,8 @@ def plot2(X,mu, K=2):
     # get clusters
     clusters = get_clusters(X, K, distances)
 
+    cluster_centers = get_cluster_centers(clusters)
+    print("cluster_centers",cluster_centers)
 
     cluster1= clusters[0]
     x_clust_1 = np.zeros(len(cluster1))
@@ -159,8 +161,23 @@ def plot2(X,mu, K=2):
         x_clust_2[i] = cluster2[i][0]
         y_clust_2[i]=cluster2[i][1]
 
-    plt.scatter(x_clust_1, y_clust_1, color ="red")
+    plt.scatter(x_clust_1, y_clust_1, color ="blue")
     plt.scatter(x_clust_2, y_clust_2, color="black")
+
+    cluster_centers = get_cluster_centers(clusters)
+    print("cluster_centers", cluster_centers)
+    x_clust_centers = np.zeros(len(cluster_centers))
+    y_clust_centers = np.zeros(len(cluster_centers))
+    for i in range(len(cluster_centers)):
+        x_clust_centers[i] = cluster_centers[i][0]
+        y_clust_centers[i] = cluster_centers[i][1]
+
+    plt.scatter(x_clust_centers, y_clust_centers, color="red")
+
+    n = ["C1", "C2"]
+    for i, txt in enumerate(n):
+        plt.annotate(txt, (x_clust_centers[i], y_clust_centers[i]))
+
     plt.show()
 
 def plot3(X, mu, K=3):
@@ -170,9 +187,7 @@ def plot3(X, mu, K=3):
 
     #get clusters
     clusters = get_clusters(X, K, distances)
-    print(clusters[0])
-    print(clusters[1])
-    print(clusters[2])
+
 
     cluster1= clusters[0]
     x_clust_1 = np.zeros(len(cluster1))
@@ -195,8 +210,24 @@ def plot3(X, mu, K=3):
         x_clust_3[i] = cluster3[i][0]
         y_clust_3[i] = cluster3[i][1]
 
-    plt.scatter(x_clust_1, y_clust_1, color ="red")
+    plt.scatter(x_clust_1, y_clust_1, color ="green")
     plt.scatter(x_clust_2, y_clust_2, color="black")
     plt.scatter(x_clust_3, y_clust_3, color="blue")
+
+
+    cluster_centers = get_cluster_centers(clusters)
+    print("cluster_centers", cluster_centers)
+    x_clust_centers = np.zeros(len(cluster_centers))
+    y_clust_centers = np.zeros(len(cluster_centers))
+    for i in range(len(cluster_centers)):
+        x_clust_centers[i] = cluster_centers[i][0]
+        y_clust_centers[i] = cluster_centers[i][1]
+
+    plt.scatter(x_clust_centers, y_clust_centers, color="red")
+
+    n = ["C1","C2","C3"]
+    for i, txt in enumerate(n):
+        plt.annotate(txt, (x_clust_centers[i], y_clust_centers[i]))
+
 
     plt.show()

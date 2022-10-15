@@ -22,21 +22,21 @@ def load_data(file_data):
 #
 # print(nn.choose_K(X,Y,X,Y))
 #
-# X = np.genfromtxt("clustering_2.csv", skip_header=1, delimiter=',')
-# #mu = np.array([[1],[5]])
-# mu = np.array([])
-# mu = kmeans.K_Means(X,3,mu)
-# print("KMeans:", mu)
-#
-# # plot2 = kmeans.plot2(X,mu)
-#
+X = np.genfromtxt("clustering_2.csv", skip_header=1, delimiter=',')
+#mu = np.array([[1],[5]])
+mu = np.array([])
+mu = kmeans.K_Means(X,3,mu)
+print("KMeans:", mu)
+
+plot2 = kmeans.plot2(X,mu)
+print(plot2)
+
 # plot3 = kmeans.plot3(X,mu)
-# # print(plot2)
 # print(plot3)
 
-X,Y = load_data("perceptron_3.csv")
-W = percept.perceptron_train(X,Y)
-print(W)
-acc = percept.perceptron_test(X,Y,W[0],W[1])
-print("Percept:", acc)
-plot = percept.plot(X,Y,W[0], W[1])
+# X,Y = load_data("perceptron_3.csv")
+# W = percept.perceptron_train(X,Y)
+# print(W)
+# acc = percept.perceptron_test(X,Y,W[0],W[1])
+# print("Percept:", acc)
+# plot = percept.plot(X,Y,W[0], W[1])

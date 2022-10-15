@@ -32,8 +32,6 @@ def KNN_test(X_train, Y_train, X_test, Y_test, K):
         else:
             preds.append(-1)
 
-
-
     #get accuracy
     correct = 0
     wrong =0
@@ -45,7 +43,10 @@ def KNN_test(X_train, Y_train, X_test, Y_test, K):
             wrong +=1
 
     accuracy = correct / (correct+wrong)
+
+    #print(preds)
     return accuracy;
+
 
 def choose_K(X_train, Y_train, X_val, Y_val):
     best_acc = 0;

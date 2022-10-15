@@ -72,50 +72,43 @@ def plot(X,Y, w,b):
     print(w[1])
     print(b)
 
-    x_arr = np.zeros(7)
-    y_arr = np.zeros(7)
-    print(x_arr)
-    print(y_arr)
-    for i in [-3,-2,-1,0,1,2,3]:
-        x = i
-        if(i == 0):
-            y = 0
+    print(X)
+
+    pos_X1_data = []
+    pos_X2_data = []
+    neg_X1_data = []
+    neg_X2_data = []
+    for i in range(len(X)):
+        if (Y[i] == 1):
+            pos_X1_data.append(X[i][0])
+            pos_X2_data.append(X[i][1])
         else:
-            y = (-x2*i - b)/i
-        x_arr[i]=x
-        y_arr[i]=y
+            neg_X1_data.append(X[i][0])
+            neg_X2_data.append(X[i][1])
 
-    print(x_arr)
-    print(y_arr)
 
-    X = x_arr
-    Y= y_arr
+    plt.scatter(pos_X1_data, pos_X2_data, color="blue")
+    plt.scatter(neg_X1_data, neg_X2_data, color="red")
 
-    Z = X*x1 + Y *x2 + b
-    plt.contour(X, Y, Z, colors='black');
+    print("w",w)
+    print("b",b)
+
+    #w[0]*x1 + w[1]*x2 + b =0
+    #w[1]*x2 = -w[0]*x1 -b
+    #x2 = -(w[0]*x1 +b) /w[1]
+
+    X1_points = np.zeros(7)
+    X2_points = np.zeros(7)
+    print(X1_points)
+    print(X2_points)
+    for i in [-3, -2, -1, 0, 1, 2, 3]:
+        x1=i
+        x2 = -(w[0] * x1 +b) / w[1]
+        X1_points[i] = x1
+        X2_points[i] = x2
+
+    print(X1_points)
+    print(X2_points)
+    plt.plot(X1_points,X2_points, color="black")
     plt.show()
 
-
-    # plt.plot(x_arr,y_arr)
-    # plt.show()
-
-    # h=.02
-    # x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
-    # y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
-    # xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
-    #                      np.arange(y_min, y_max, h))
-    #
-    # # Plot the decision boundary. For that, we will assign a color to each
-    # # point in the mesh [x_min, m_max]x[y_min, y_max].
-    # fig, ax = plt.subplots()
-    # Z = predict(X, w,b)
-    #
-    # # Put the result into a color plot
-    # # Z = Z.reshape(xx.shape)
-    # ax.contourf(xx, yy, Z, cmap=plt.cm.Paired)
-    # ax.axis('off')
-    #
-    # # Plot also the training points
-    # ax.scatter(X[:, 0], X[:, 1], c=Y, cmap=plt.cm.Paired)
-    #
-    # ax.set_title('Perceptron')

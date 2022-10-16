@@ -6,9 +6,11 @@ def perceptron_train(X,Y):
     weights = np.zeros(len(X[0]))
     bias = 0
     count,weights, bias = epoch(X,Y,weights, bias)
+    epoch_count = 1
 
-    #continue until a whole epoch goes without a change in weights and bias
-    while(count !=0):
+    #continue until a whole epoch goes without a change in weights and bias or epoch count go higher than 1000
+    while(count !=0) and (epoch_count <=1000):
+        epoch_count +=1
         count,weights, bias = epoch(X,Y,weights, bias)
 
     return weights,bias

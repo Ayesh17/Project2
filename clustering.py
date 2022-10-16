@@ -36,7 +36,22 @@ def K_Means_cal(X, K, mu):
     # get clusters
     clusters = get_clusters(X, K, distances)
 
-    # get cluster centers
+    empty = 0
+
+    #Reduce num. of clusters if some clusters are empty
+    indexes = []
+    for i in range(len(clusters)):
+        if (len(clusters[i]) == 0):
+            indexes.append(i)
+            empty +=1
+
+    K -= len(indexes)
+
+    for i in reversed( range(len(indexes))):
+        clusters.pop(indexes[i])
+
+
+    #get cluster centers
     centers = get_cluster_centers(clusters)
 
     # recursively call the function until cluster centers doesn't change

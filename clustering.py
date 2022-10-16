@@ -56,6 +56,7 @@ def K_Means_cal(X, K, mu):
 
     # recursively call the function until cluster centers doesn't change
     if np.array_equal(mu, centers):
+        print("centers", centers)
         return centers
     else:
         return K_Means_cal(X, K, centers)

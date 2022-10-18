@@ -1,6 +1,5 @@
 import numpy as np
 import scipy.spatial as sci
-import matplotlib.pyplot as plt
 
 def min_max(X):
     min = np.min(X,axis=0)
@@ -9,7 +8,6 @@ def min_max(X):
 
 def K_Means(X, K, mu):
     # to suit both 1D and multi dimential arrays
-    print(len(mu))
 
     min,max = min_max(X)
 
@@ -20,7 +18,6 @@ def K_Means(X, K, mu):
         else:
             mu = np.random.randint(min,max,size=(K,len(X[0])))
 
-    print("mu new",mu[0][1])
 
     if (isinstance(X[0], float)):
         X = X.reshape(len(X), 1)
@@ -38,11 +35,27 @@ def K_Means_cal(X, K, mu):
     # get clusters
     clusters = get_clusters(X, K, distances)
 
-    # get cluster centers
+    empty = 0
+
+    #Reduce num. of clusters if some clusters are empty
+    indexes = []
+    for i in range(len(clusters)):
+        if (len(clusters[i]) == 0):
+            indexes.append(i)
+            empty +=1
+
+    K -= len(indexes)
+
+    for i in reversed( range(len(indexes))):
+        clusters.pop(indexes[i])
+
+
+    #get cluster centers
     centers = get_cluster_centers(clusters)
 
     # recursively call the function until cluster centers doesn't change
     if np.array_equal(mu, centers):
+        print("centers", centers)
         return centers
     else:
         return K_Means_cal(X, K, centers)
@@ -52,18 +65,15 @@ def K_Means_cal(X, K, mu):
 def distance(X, K, mu):
     cent = mu
     distances = []
-    print("X st",X)
-    print("cent start", cent)
     for i in range(len(X)):
         dist_list = []
         for j in range(K):
-            print("x",X[i])
-            print("j",cent[j])
+
             dist = sci.distance.euclidean(X[i], cent[j])
-            print("dist",dist)
+
             dist_list.append(dist)
         distances.append(dist_list)
-    print("distances",distances)
+
     return distances
 
 def get_clusters(X, K, distances):
@@ -104,12 +114,13 @@ def K_Means_better(X,K):
 
     #get the count of cluster centers
     centers_list_arr = np.array(centers)
+
     val, count = np.unique(centers_list_arr, axis =0, return_counts = True)
 
     #get best cluster center
     best_center = val[count == count.max()]
 
-    return best_center
+    return best_center[0]
 
 
 
@@ -135,68 +146,3 @@ def get_randoms(X,K):
         arr[i] = result[randoms[i]]
 
     return arr
-
-def plot2(X,mu, K=2):
-    # get euclidean distance
-    distances = distance(X, K, mu)
-    print(distances)
-
-    # get clusters
-    clusters = get_clusters(X, K, distances)
-
-
-    cluster1= clusters[0]
-    x_clust_1 = np.zeros(len(cluster1))
-    y_clust_1 = np.zeros(len(cluster1))
-    for i in range(len(clusters[0])):
-        x_clust_1[i] = cluster1[i][0]
-        y_clust_1[i]=cluster1[i][1]
-
-    cluster2 = clusters[1]
-    x_clust_2 = np.zeros(len(cluster2))
-    y_clust_2 = np.zeros(len(cluster2))
-    for i in range(len(cluster2)):
-        x_clust_2[i] = cluster2[i][0]
-        y_clust_2[i]=cluster2[i][1]
-
-    plt.scatter(x_clust_1, y_clust_1, color ="red")
-    plt.scatter(x_clust_2, y_clust_2, color="black")
-    plt.show()
-
-def plot3(X, mu, K=3):
-    # get euclidean distance
-    distances = distance(X, K, mu)
-    print(distances)
-
-    #get clusters
-    clusters = get_clusters(X, K, distances)
-    print(clusters[0])
-    print(clusters[1])
-    print(clusters[2])
-
-    cluster1= clusters[0]
-    x_clust_1 = np.zeros(len(cluster1))
-    y_clust_1 = np.zeros(len(cluster1))
-    for i in range(len(clusters[0])):
-        x_clust_1[i] = cluster1[i][0]
-        y_clust_1[i]=cluster1[i][1]
-
-    cluster2 = clusters[1]
-    x_clust_2 = np.zeros(len(cluster2))
-    y_clust_2 = np.zeros(len(cluster2))
-    for i in range(len(cluster2)):
-        x_clust_2[i] = cluster2[i][0]
-        y_clust_2[i]=cluster2[i][1]\
-
-    cluster3 = clusters[2]
-    x_clust_3 = np.zeros(len(cluster3))
-    y_clust_3 = np.zeros(len(cluster3))
-    for i in range(len(cluster3)):
-        x_clust_3[i] = cluster3[i][0]
-        y_clust_3[i] = cluster3[i][1]
-
-    plt.scatter(x_clust_1, y_clust_1, color ="red")
-    plt.scatter(x_clust_2, y_clust_2, color="black")
-    plt.scatter(x_clust_3, y_clust_3, color="blue")
-
-    plt.show()

@@ -1,19 +1,16 @@
 import numpy as np
-import math
 import scipy.spatial as sci
 
 def KNN_test(X_train, Y_train, X_test, Y_test, K):
-
     #get Euclidean distances
     distances = []
     for i in range (len(X_test)):
         dist_list = []
         for j in range(len(X_train)):
-            dist = sci.distance.euclidean(X_train[i],X_test[j])
+            dist = sci.distance.euclidean(X_test[i],X_train[j])
             dist_list.append(dist)
         dist_list = np.argsort(dist_list)
         dist_list = dist_list[0:K]
-
         distances.append(dist_list)
 
     #get predictions
@@ -22,7 +19,7 @@ def KNN_test(X_train, Y_train, X_test, Y_test, K):
         positives = 0
         negatives = 0
         for j in range(len(distances[i])):
-            if (Y_test[distances[i][j]] == 1):
+            if (Y_train[distances[i][j]] == 1):
                 positives += 1
             else:
                 negatives +=1

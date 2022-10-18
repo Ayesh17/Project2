@@ -1,14 +1,15 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 def perceptron_train(X,Y):
 
     weights = np.zeros(len(X[0]))
     bias = 0
     count,weights, bias = epoch(X,Y,weights, bias)
+    epoch_count = 1
 
-    #continue until a whole epoch goes without a change in weights and bias
-    while(count !=0):
+    #continue until a whole epoch goes without a change in weights and bias or epoch count go higher than 1000
+    while(count !=0) and (epoch_count <=1000):
+        epoch_count +=1
         count,weights, bias = epoch(X,Y,weights, bias)
 
     return weights,bias
@@ -64,58 +65,4 @@ def predict(X_test,w,b):
         preds.append(a)
     return preds
 
-def plot(X,Y, w,b):
-    # clf = Perceptron(n_iter=100).fit(X, Y)
-    x1=w[0]
-    x2=w[1]
-    print(w[0])
-    print(w[1])
-    print(b)
 
-    x_arr = np.zeros(7)
-    y_arr = np.zeros(7)
-    print(x_arr)
-    print(y_arr)
-    for i in [-3,-2,-1,0,1,2,3]:
-        x = i
-        if(i == 0):
-            y = 0
-        else:
-            y = (-x2*i - b)/i
-        x_arr[i]=x
-        y_arr[i]=y
-
-    print(x_arr)
-    print(y_arr)
-
-    X = x_arr
-    Y= y_arr
-
-    Z = X*x1 + Y *x2 + b
-    plt.contour(X, Y, Z, colors='black');
-    plt.show()
-
-
-    # plt.plot(x_arr,y_arr)
-    # plt.show()
-
-    # h=.02
-    # x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
-    # y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
-    # xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
-    #                      np.arange(y_min, y_max, h))
-    #
-    # # Plot the decision boundary. For that, we will assign a color to each
-    # # point in the mesh [x_min, m_max]x[y_min, y_max].
-    # fig, ax = plt.subplots()
-    # Z = predict(X, w,b)
-    #
-    # # Put the result into a color plot
-    # # Z = Z.reshape(xx.shape)
-    # ax.contourf(xx, yy, Z, cmap=plt.cm.Paired)
-    # ax.axis('off')
-    #
-    # # Plot also the training points
-    # ax.scatter(X[:, 0], X[:, 1], c=Y, cmap=plt.cm.Paired)
-    #
-    # ax.set_title('Perceptron')
